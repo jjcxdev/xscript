@@ -62,6 +62,12 @@ let isEqualXScript = numericZero == stringZero; // This is the correct explicit 
 // In JavaScript, comparing zero with an empty array returns true.
 let isEqualToArrayJS = 0 == []; // returns true
 ```
+###### TypeScript
+```javascript
+// TypeScript will identify this as an error due to strict type checking.
+let emptyArrayTS: any[] = [];
+let isEqualToArrayTS: boolean = 0 == emptyArrayTS; // TypeScript error: Type 'number' is not comparable to type 'any[]'.
+```
 ###### XScript
 ```javascript
 // In XScript, an empty array and a number are considered different types.
@@ -82,10 +88,10 @@ let additionJS = 2 + "2"; // Results in "22" due to implicit type coercion.
 ```
 ###### TypeScript
 ```javascript
-// TypeScript requires explicit handling of types.
+// TypeScript allows this operation, resulting in string concatenation.
 let numTS: number = 2;
 let strTS: string = "2";
-let additionTS = numTS + strTS; // TypeScript allows this, resulting in string concatenation: "22"
+let additionTS: string = numTS + strTS; // "22"
 ```
 ###### XScript
 ```javascript
@@ -105,6 +111,11 @@ let correctAdditionXScript = numAsString + str; // "22" - Now both are strings.
 // In JavaScript, multiplying two stringified numbers performs implicit conversion to numbers and then multiplies.
 let productJS = "2" * "3"; // Results in 6.
 ```
+###### TypeScript
+```javascript
+// TypeScript allows string multiplication due to JavaScript's implicit coercion.
+let productTS: number = "2" * "3"; // 6
+```
 ###### XScript
 ```javascript
 // In XScript, direct conversion like `#"2"` is not allowed. Multiplication should be done through variables.
@@ -119,6 +130,11 @@ let productXScript = #str1 * #str2; // Valid in XScript: Both strings are conver
 // In JavaScript, null and undefined are considered equal.
 let isEqualJS = null == undefined; // true
 ```
+###### TypeScript
+```javascript
+// TypeScript follows JavaScript's behavior for null and undefined comparison.
+let isEqualNullUndefinedTS: boolean = null == undefined; // true
+```
 ###### XScript
 ```javascript
 // In XScript, the behavior of comparing null and undefined remains the same as JavaScript for practicality.
@@ -130,6 +146,12 @@ let isEqualXScript = null == undefined; // true
 ```javascript
 // In JavaScript, comparing an array containing a single number to that number returns true due to type coercion.
 let isEqualToArrayJS = [10] == 10; // true
+```
+###### TypeScript
+```javascript
+// TypeScript will also treat this as a type mismatch, similar to XScript.
+let arrayTS: number[] = [10];
+let isEqualToArrayTS: boolean = arrayTS == 10; // TypeScript error: Type 'number[]' is not comparable to type 'number'.
 ```
 ###### XScript
 ```javascript
@@ -169,6 +191,14 @@ let directConversion = #"100"; // Error: Direct conversion not allowed
 Function definitions in XScript require explicit numeric conversions for parameters. Examples demonstrate how functions are defined and used with XScript's type rules.
 
 Example 1: Numeric Addition
+###### JavaScript
+```javascript
+// Function to add two numbers, interpreted as strings.
+function addNumbersJS(strNum1, strNum2) {
+    return parseInt(strNum1) + parseInt(strNum2);
+}
+let resultJS = addNumbersJS("10", "20"); // Valid: 30
+```
 ###### TypeScript
 ```javascript
 // Function to add two numbers, with string inputs converted to numbers.
@@ -188,6 +218,14 @@ let errorResult = addNumbers(10, 20); // Error: Direct numeric input without exp
 ```
 
 Example 2: String Concatenation
+###### JavaScript
+```javascript
+// Function to concatenate two numbers as strings.
+function concatenateNumbersJS(num1, num2) {
+    return num1.toString() + num2.toString();
+}
+let concatenatedResultJS = concatenateNumbersJS(10, 20); // "1020"
+```
 ###### TypeScript
 ```javascript
 // Function to concatenate two numbers as strings.
@@ -208,9 +246,25 @@ let concatenatedResult = concatenateNumbers(#10, #20); // Valid: Concatenates "1
 ```
 
 Example 3: Conditional Function
-###### XScript
+###### JavaScript
 ```javascript
 // Function to check if a number is greater than a threshold.
+function isGreaterThanThresholdJS(num, threshold) {
+    return num > threshold;
+}
+let isGreaterJS = isGreaterThanThresholdJS(15, 10); // Valid: Checks if 15 is greater than 10.
+```
+###### TypeScript
+```javascript
+// TypeScript function with type annotations to check if a number is greater than a threshold.
+function isGreaterThanThresholdTS(num: number, threshold: number): boolean {
+    return num > threshold;
+}
+let isGreaterTS = isGreaterThanThresholdTS(15, 10); // Valid: Checks if 15 is greater than 10.
+```
+###### XScript
+```javascript
+// Function to check if a number is greater than a threshold in XScript.
 function isGreaterThanThreshold(strNum, threshold) {
     let num = #strNum; // Convert string to number
     let numThreshold = #threshold;
