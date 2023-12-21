@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/jjcxdev/xscript/292482b4e13818006b033462c912c54cb08f8e17/xs.svg)
+![](https://raw.githubusercontent.com/jjcxdev/xscript/ea8451abf5067962dded6d240aef25524f51ca45/xs_sm.svg)
 
 # XScript
 XScript is a superset of JavaScript that emphasizes precise and explicit type management. In XScript, every numerical expression must be explicitly defined as either a string, enclosed in double quotes "", or as a number, prefixed with #. Failure to do so will result in a “Number type not defined” error, highlighting the language’s commitment to explicit type declaration. This document provides a comprehensive guide to the syntax, principles, and usage of XScript, with a focus on its unique approach to handling numeric types.
