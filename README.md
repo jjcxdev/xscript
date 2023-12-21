@@ -7,12 +7,14 @@ XScript is a superset of JavaScript that emphasizes precise and explicit type ma
 2.	Resolving Logical Quirks in XScript
 3.	Variable Declarations
 4.	Numeric Operations
-5.	Function Definitions
-6.	Objects and Arrays
-7.	Control Structures
-8.	Error Handling
-9.	Special Considerations
-10.	Examples
+5.	Handling Non-Numeric Strings in XScript
+6.	String to Number Conversion Rules
+7.	Function Definitions
+8.	Objects and Arrays
+9.	Control Structures
+10.	Error Handling
+11.	Special Considerations
+12.	Examples
 
 ## 1. Introduction
 
