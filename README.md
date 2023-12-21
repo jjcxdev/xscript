@@ -47,13 +47,10 @@ let isEqualTS = numericZeroTS == stringZeroTS; // TypeScript error: Type 'number
 ```
 ###### XScript
 ```javascript
-// In XScript, such comparisons require explicit type declaration.
+// In XScript, the '==' operator is designed to behave like JavaScript's '==='.
 let numericZero = #0; // Numeric zero
 let stringZero = "0"; // String zero
-let isEqualXScript = numericZero == stringZero; // This is the correct explicit numeric declaration in XScript
-
-// isEqualXScript will be false because XScript does not perform implicit type coercion.
-// The comparison is between a number and a string, and XScript treats them as different types.
+let isEqualXScript = numericZero == stringZero; // False, as XScript's '==' does not perform type coercion
 ```
 	
 ### Zero and Empty Array Comparison:
@@ -95,14 +92,10 @@ let additionTS: string = numTS + strTS; // "22"
 ```
 ###### XScript
 ```javascript
-// In XScript, attempting to add a number directly to a string results in an error.
+// Attempting to add a number directly to a string results in an error in XScript.
 let num = #2;
 let str = "2";
-let additionXScript = num + str; // Error: Cannot directly add a number and a string.
-
-// Correct approach in XScript: Convert the number to a string first.
-let ""numAsString = num;
-let correctAdditionXScript = numAsString + str; // "22" - Now both are strings.
+let additionXScript = num + str; // Error: Cannot directly add a number and a string
 ```
 
 ### String Multiplication:
@@ -213,8 +206,7 @@ let resultTS = addNumbersTS("10", "20"); // Valid: 30
 function addNumbers(strNum1, strNum2) {
     return #strNum1 + #strNum2;
 }
-let result = addNumbers("10", "20"); // Valid: Converts strings to numbers and adds them.
-let errorResult = addNumbers(10, 20); // Error: Direct numeric input without explicit declaration.
+let result = addNumbers("10", "20"); // Valid: Converts strings to numbers and adds them
 ```
 
 Example 2: String Concatenation
@@ -264,13 +256,13 @@ let isGreaterTS = isGreaterThanThresholdTS(15, 10); // Valid: Checks if 15 is gr
 ```
 ###### XScript
 ```javascript
-// Function to check if a number is greater than a threshold in XScript.
+// Function to check if a number is greater than a threshold.
 function isGreaterThanThreshold(strNum, threshold) {
     let num = #strNum; // Convert string to number
     let numThreshold = #threshold;
-    return num > numThreshold;
+    return num == numThreshold; // Uses XScript's '==' for strict comparison
 }
-let isGreater = isGreaterThanThreshold("15", "10"); // Valid: Checks if 15 is greater than 10.
+let isGreater = isGreaterThanThreshold("15", "10"); // False, as '15' is not equal to '10'
 ```
 
 ## 7. Invalid Conversion Attempts
