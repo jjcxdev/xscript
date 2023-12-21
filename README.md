@@ -58,20 +58,19 @@ let areEqual = numericValue == stringValue; // False, as one is a number and the
 XScript counters JavaScript’s type coercion quirks by enforcing explicit type handling, ensuring more predictable and error-resistant code. The quirks and XScript's handling of them are detailed in this section.
 
 ### Zero and String Zero Comparison:
-###### JavaScript
+
 ```javascript
+// JavaScript
 // In JavaScript, comparing a numeric zero with a string '0' returns true due to type coercion.
 let isEqualJS = 0 == "0"; // returns true
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript also enforces type safety, so a comparison like this would be flagged during compilation.
 let numericZeroTS: number = 0;
 let stringZeroTS: string = "0";
 let isEqualTS = numericZeroTS == stringZeroTS; // TypeScript error: Type 'number' is not comparable to type 'string'.
-```
-###### XScript
-```javascript
+
+// XScript
 // In XScript, the '==' operator is designed to behave like JavaScript's '==='.
 let numericZero = #0; // Numeric zero
 let stringZero = "0"; // String zero
@@ -79,19 +78,18 @@ let isEqualXScript = numericZero == stringZero; // False, as XScript's '==' does
 ```
 	
 ### Zero and Empty Array Comparison:
-###### JavaScript
+
 ```javascript
+// JavaScript
 // In JavaScript, comparing zero with an empty array returns true.
 let isEqualToArrayJS = 0 == []; // returns true
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript will identify this as an error due to strict type checking.
 let emptyArrayTS: any[] = [];
 let isEqualToArrayTS: boolean = 0 == emptyArrayTS; // TypeScript error: Type 'number' is not comparable to type 'any[]'.
-```
-###### XScript
-```javascript
+
+// XScript
 // In XScript, an empty array and a number are considered different types.
 let emptyArray = []; // An empty array
 let numericZeroXScript = #0; // Numeric zero in XScript
@@ -103,20 +101,19 @@ let isEqualToArrayXScript = numericZeroXScript == emptyArray; // Results in an e
 ```
 	
 ### Number and String Addition:
-###### JavaScript
+
 ```javascript
+// JavaScript
 // In JavaScript, adding a number and a string results in string concatenation.
 let additionJS = 2 + "2"; // Results in "22" due to implicit type coercion.
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript allows this operation, resulting in string concatenation.
 let numTS: number = 2;
 let strTS: string = "2";
 let additionTS: string = numTS + strTS; // "22"
-```
-###### XScript
-```javascript
+
+// XScript
 // Attempting to add a number directly to a string results in an error in XScript.
 let num = #2;
 let str = "2";
@@ -124,18 +121,17 @@ let additionXScript = num + str; // Error: Cannot directly add a number and a st
 ```
 
 ### String Multiplication:
-###### JavaScript
+
 ```javascript
+// JavaScript
 // In JavaScript, multiplying two stringified numbers performs implicit conversion to numbers and then multiplies.
 let productJS = "2" * "3"; // Results in 6.
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript allows string multiplication due to JavaScript's implicit coercion.
 let productTS: number = "2" * "3"; // 6
-```
-###### XScript
-```javascript
+
+// XScript
 // In XScript, direct conversion like `#"2"` is not allowed. Multiplication should be done through variables.
 let str1 = "2";
 let str2 = "3";
@@ -143,36 +139,34 @@ let productXScript = #str1 * #str2; // Valid in XScript: Both strings are conver
 ```
 
 ### Null and Undefined Comparison:
-###### JavaScript
+
 ```javascript
+// JavaScript
 // In JavaScript, null and undefined are considered equal.
 let isEqualJS = null == undefined; // true
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript follows JavaScript's behavior for null and undefined comparison.
 let isEqualNullUndefinedTS: boolean = null == undefined; // true
-```
-###### XScript
-```javascript
+
+// XScript
 // In XScript, the behavior of comparing null and undefined remains the same as JavaScript for practicality.
 let isEqualXScript = null == undefined; // true
 ```
 
 ### Array and Number Comparison:
-###### JavaScript
+
 ```javascript
+// JavaScript
 // In JavaScript, comparing an array containing a single number to that number returns true due to type coercion.
 let isEqualToArrayJS = [10] == 10; // true
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript will also treat this as a type mismatch, similar to XScript.
 let arrayTS: number[] = [10];
 let isEqualToArrayTS: boolean = arrayTS == 10; // TypeScript error: Type 'number[]' is not comparable to type 'number'.
-```
-###### XScript
-```javascript
+
+// XScript
 // In XScript, strict type comparisons are enforced.
 let arrayXScript = [#10];
 let numberXScript = #10;
@@ -221,24 +215,23 @@ In this example, #strNumber converts the string `"123"` into the number `123`, e
 Function definitions in XScript require explicit numeric conversions for parameters. Examples demonstrate how functions are defined and used with XScript's type rules.
 
 ### Numeric Addition
-###### JavaScript
+
 ```javascript
+// JavaScript
 // Function to add two numbers, interpreted as strings.
 function addNumbersJS(strNum1, strNum2) {
     return parseInt(strNum1) + parseInt(strNum2);
 }
 let resultJS = addNumbersJS("10", "20"); // Valid: 30
-```
-###### TypeScript
-```javascript
+ 
+// TypeScript
 // Function to add two numbers, with string inputs converted to numbers.
 function addNumbersTS(num1: string, num2: string): number {
     return parseInt(num1) + parseInt(num2);
 }
 let resultTS = addNumbersTS("10", "20"); // Valid: 30
-```
-###### XScript
-```javascript
+
+// XScript
 // Function to add two numbers, with string inputs converted to numbers.
 function addNumbers(strNum1, strNum2) {
     return #strNum1 + #strNum2;
@@ -247,24 +240,23 @@ let result = addNumbers("10", "20"); // Valid: Converts strings to numbers and a
 ```
 
 ### String Concatenation
-###### JavaScript
+
 ```javascript
+// JavaScript
 // Function to concatenate two numbers as strings.
 function concatenateNumbersJS(num1, num2) {
     return num1.toString() + num2.toString();
 }
 let concatenatedResultJS = concatenateNumbersJS(10, 20); // "1020"
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // Function to concatenate two numbers as strings.
 function concatenateNumbersTS(num1: number, num2: number): string {
     return num1.toString() + num2.toString();
 }
 let concatenatedResultTS = concatenateNumbersTS(10, 20); // "1020"
-```
-###### XScript
-```javascript
+
+// XScript
 // Function to concatenate two numbers as strings.
 function concatenateNumbers(num1, num2) {
     let ""str1 = num1; // Explicitly converting number to string
@@ -275,24 +267,23 @@ let concatenatedResult = concatenateNumbers(#10, #20); // Valid: Concatenates "1
 ```
 
 ### Conditional Function
-###### JavaScript
+
 ```javascript
+// JavaScript
 // Function to check if a number is greater than a threshold.
 function isGreaterThanThresholdJS(num, threshold) {
     return num > threshold;
 }
 let isGreaterJS = isGreaterThanThresholdJS(15, 10); // Valid: Checks if 15 is greater than 10.
-```
-###### TypeScript
-```javascript
+
+// TypeScript
 // TypeScript function with type annotations to check if a number is greater than a threshold.
 function isGreaterThanThresholdTS(num: number, threshold: number): boolean {
     return num > threshold;
 }
 let isGreaterTS = isGreaterThanThresholdTS(15, 10); // Valid: Checks if 15 is greater than 10.
-```
-###### XScript
-```javascript
+
+// XScript
 // Function to check if a number is greater than a threshold.
 function isGreaterThanThreshold(strNum, threshold) {
     let num = #strNum; // Convert string to number
@@ -363,20 +354,31 @@ if (condition > #3) {
 XScript uses JavaScript’s try-catch mechanism for error handling, with additional focus on type-related errors. Special considerations for handling strings and numbers are discussed, emphasizing the importance of explicit type declaration.
 
 ##### Numeric Addition vs String Concatenation
+###### JavaScript
 ```javascript
-// JavaScript
+// JavaScript example demonstrating error handling
 try {
-    let num = #123;
-    let invalid = #("abc"); // Error: String cannot be converted to number
+    let num = parseInt("123");
+    let invalid = parseInt("abc"); // This will not throw an error but will result in NaN
 } catch (error) {
     console.error("Caught error:", error.message);
 }
+```
+###### XScript
+```javascript
+// XScript example demonstrating type-related error handling
+try {
+    let numValue = #50;
+    let invalidValue = #"abc"; // Error: String "abc" cannot be converted to number
+} catch (error) {
+    console.error("Caught error:", error.message); // Handles the type conversion error
+}
 
-// XScript
-let numValue = #50;
+// Demonstrating explicit string conversion in XScript
 let stringValue = "" + numValue; // Explicitly converting number to string
 console.log("Number as string:", stringValue);
 ```
+In the XScript example, the `try-catch` block is used to handle errors resulting from incorrect type usage, like attempting to convert a non-numeric string to a number. The JavaScript example is corrected to use standard JavaScript syntax, showcasing typical error handling in JavaScript. This comparison helps to illustrate how XScript enhances error handling, particularly for type-related issues.
 
 ## 11. Examples
 The examples section illustrates various scenarios in JavaScript, TypeScript, and XScript, highlighting the differences in how each language handles type conversions, operations, and structure handling.
